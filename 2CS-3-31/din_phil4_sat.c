@@ -1,12 +1,10 @@
 #include <pthread.h>
 #include <assert.h>
-#include "common.inc"
+
+#include <stdio.h>
 
 #define N 4
 
-//void __ESBMC_atomic_begin();
-//void __ESBMC_atomic_end();
-  
 pthread_mutex_t  x[N];
 int phil;
 
@@ -20,22 +18,20 @@ void *thread1(void *arg)
   left=id;
   right=(id+1)%N;
 
-  __ESBMC_atomic_begin();
   pthread_mutex_lock(&x[right]);
   pthread_mutex_lock(&x[left]);
   pthread_mutex_unlock(&x[left]);
   pthread_mutex_unlock(&x[right]);
-  __ESBMC_atomic_end();
 
-  ++phil;
-  if (phil==N)
-    assert(0);
+  return NULL;
 }
 
 int main()
 {
   int i;
   int arg[N];
+  phil = 0;
+
   pthread_t trd_id[N];
 
   for(i=0; i<N; i++)
