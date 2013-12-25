@@ -1,6 +1,6 @@
 #include <pthread.h>
 #include <assert.h>
-#include "common.inc"
+//#include "common.inc"
 
 #define TRUE  (1)
 #define FALSE (0)
@@ -21,9 +21,9 @@ int BCSP_IoIncrement(DEVICE_EXTENSION *e)
   if (e->stoppingFlag)
     return -1;
 
-  __ESBMC_atomic_begin();
+  //__ESBMC_atomic_begin();
   e->pendingIo = e->pendingIo + 1;
-  __ESBMC_atomic_end();  
+  //__ESBMC_atomic_end();  
   
   return 0;
 }
@@ -32,10 +32,10 @@ void BCSP_IoDecrement(DEVICE_EXTENSION *e)
 {
   int pendingIo;
 
-  __ESBMC_atomic_begin();
+  //__ESBMC_atomic_begin();
   e->pendingIo = e->pendingIo - 1;
   pendingIo = e->pendingIo;
-  __ESBMC_atomic_end();  
+  //__ESBMC_atomic_end();  
 
   if (pendingIo == 0)
     e->stoppingEvent = TRUE;
@@ -66,9 +66,11 @@ void* BCSP_PnpStop(void* arg)
     //release allocated resource
     stopped = TRUE;
   }
+
+  return NULL;
 }
 
-void main() 
+int main() 
 {
   pthread_t id;
   DEVICE_EXTENSION e;
