@@ -23,6 +23,8 @@ int main(int argc, char *argv[]) {
     sb->append(buffer);
   //}
 
+  pthread_join(thd, NULL);
+
   return 0;
 }
 
