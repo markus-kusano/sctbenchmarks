@@ -30,6 +30,8 @@ void *thread1(void *arg)
 
     i++;
   }
+
+  return NULL;
 }
 
 void *thread2(void *arg)
@@ -54,6 +56,8 @@ void *thread2(void *arg)
   total=total+j;
   printf("total ....%ld\n",total);
   flag=1;
+
+  return NULL;
 }
 
 

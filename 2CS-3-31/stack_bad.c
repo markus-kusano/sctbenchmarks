@@ -29,10 +29,12 @@ int get_top(void)
   return top;
 }
 
+#if 0
 int stack_empty(void)
 {
   (top==0) ? TRUE : FALSE; 
 }
+#endif
 
 int push(unsigned int *stack, int x)
 {
@@ -75,6 +77,8 @@ void *t1(void *arg)
     flag=TRUE;
     pthread_mutex_unlock(&m);
   }
+
+  return NULL;
 }
 
 void *t2(void *arg) 
@@ -88,6 +92,8 @@ void *t2(void *arg)
       assert(pop(arr)!=UNDERFLOW); /* BAD */
     pthread_mutex_unlock(&m);
   }
+
+  return NULL;
 }
 
 

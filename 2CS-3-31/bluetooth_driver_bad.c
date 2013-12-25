@@ -83,4 +83,6 @@ int main()
   pthread_create(&id, NULL, BCSP_PnpStop, &e);
   BCSP_PnpAdd(&e);
   pthread_join(id, NULL);
+
+  return 0;
 }
